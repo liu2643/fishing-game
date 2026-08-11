@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>捕鱼大作战 - HTML5 单机版</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- 加载界面 -->
+<div id="loading">
+  <div class="loading-box">
+    <h1 class="loading-title">🎣 捕鱼大作战</h1>
+    <div class="loading-track"><div id="loading-bar"></div></div>
+    <div id="loading-pct">0%</div>
+    <div id="loading-tip">正在唤醒海洋深处…</div>
+  </div>
+</div>
+
+<!-- 开始界面 -->
+<div id="start-screen" class="hidden">
+  <div class="start-box">
+    <h1 class="start-title">🎣 捕鱼大作战</h1>
+    <p class="start-sub">概率制捕鱼 · 捕到才给钱 · 倍率越高捕获率越高（子弹变色：绿/蓝/紫/金）</p>
+    <div class="start-help">
+      <table>
+        <tr><td class="key">鼠标移动</td><td>控制炮台方向（指哪打哪）</td></tr>
+        <tr><td class="key">左键</td><td>发射子弹（直线飞行，命中扩散成网）</td></tr>
+        <tr><td class="key">右键</td><td>自动开火 开/关</td></tr>
+        <tr><td class="key">滚轮</td><td>切换倍率（1×绿 / 2×蓝 / 5×紫 / 10×金）</td></tr>
+        <tr><td class="key">Q</td><td>冰冻：全场鱼减速 + 蓝色涟漪</td></tr>
+        <tr><td class="key">W</td><td>狂暴：射速翻倍 + 子弹加速</td></tr>
+        <tr><td class="key">E</td><td>锁定：只攻击鼠标圈住的鱼</td></tr>
+        <tr><td class="key">ESC</td><td>暂停游戏</td></tr>
+      </table>
+      <p class="start-tip">提示：捕到鱼才获得金币。小鱼易捕、大鱼难捕；倍率越高，捕获概率和金币收益越高（网的范围不变）</p>
+    </div>
+    <button id="btn-start" class="start-btn">开始游戏</button>
+  </div>
+</div>
+
+<!-- 游戏画布 -->
+<canvas id="game-canvas" width="1280" height="720"></canvas>
+
+<!-- DOM UI 层 -->
+<div id="game-ui"></div>
+
+<!-- 暂停遮罩（ESC 触发） -->
+<div id="pause-screen" class="hidden">
+  <div class="pause-box">
+    <h2>⏸ 已暂停</h2>
+    <p>按 <b>ESC</b> 或点击按钮继续</p>
+    <button id="btn-resume" class="start-btn">继续游戏</button>
+  </div>
+</div>
+
+<!-- 脚本（依赖顺序：config → utils → 实体 → 渲染/逻辑/UI → 主程序） -->
+<script src="assets/fish/fishlist.js"></script>
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/AssetLoader.js"></script>
+<script src="js/EventManager.js"></script>
+<script src="js/entities/Fish.js"></script>
+<script src="js/entities/Bullet.js"></script>
+<script src="js/entities/Cannon.js"></script>
+<script src="js/entities/Coin.js"></script>
+<script src="js/entities/Effect.js"></script>
+<script src="js/Renderer.js"></script>
+<script src="js/GameLogic.js"></script>
+<script src="js/UI.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/main.js"></script>
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const game = new window.Game();
+    window.__game = game;
+    game.boot();
+  });
+</script>
+</body>
+</html>
